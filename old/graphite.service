@@ -1,0 +1,12 @@
+[Unit]
+Description=Graphite container
+Author=Sebastien Chabrolles
+Requires=docker.service
+
+[Service]
+Restart=on-abort
+ExecStart=/usr/bin/docker start -a graphite
+ExecStop=/usr/bin/docker stop -t 2 graphite
+
+[Install]
+WantedBy=graphical.target
