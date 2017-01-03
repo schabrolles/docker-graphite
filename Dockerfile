@@ -14,7 +14,6 @@ RUN apt-get -y --force-yes install vim\
  python-ldap\
  expect\
  git\
- memcached\
  sqlite3\
  libcairo2\
  libcairo2-dev\
@@ -63,7 +62,6 @@ ADD conf/etc/logrotate.d/graphite-statsd /etc/logrotate.d/graphite-statsd
 ADD conf/etc/service/carbon/run /etc/service/carbon/run
 ADD conf/etc/service/carbon-aggregator/run /etc/service/carbon-aggregator/run
 ADD conf/etc/service/graphite/run /etc/service/graphite/run
-ADD conf/etc/service/statsd/run /etc/service/statsd/run
 ADD conf/etc/service/nginx/run /etc/service/nginx/run
 
 # default conf setup
@@ -76,7 +74,7 @@ RUN apt-get clean\
 
 # defaults
 EXPOSE 8080 2003-2004 2023-2024
-VOLUME ["/opt/graphite/conf", "/opt/graphite/storage", "/etc/nginx", "/etc/logrotate.d", "/var/log"]
+VOLUME ["/opt/graphite/conf", "/opt/graphite/storage", "/etc/nginx" ]
 WORKDIR /
 ENV HOME /root
 CMD ["/etc/my_init.d/01_conf_init.sh"]
