@@ -26,8 +26,9 @@ if [[ -z $graphite_webapp_dir_contents ]]; then
 fi
 
 # init graphitedb if empty.
-graphitedb_size=$(ls -s ${graphite_storage_dir_contents}/graphite.db | awk '{ print $1 }')
-[[ $graphitedb_size -eq 0 ]] && python ${graphite_storage_dir_contents}/manage.py syncdb --noinput
+graphitedb_size=$(ls -s /opt/graphite/storage/graphite.db | awk '{ print $1 }')
+echo $graphitedb_size
+[[ $graphitedb_size -eq 0 ]] && python /opt/graphite/webapp/graphite/manage.py syncdb --noinput
 
 # Start all deamon
 /etc/service/carbon/run &
