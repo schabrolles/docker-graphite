@@ -23,6 +23,8 @@ if [[ -z $graphite_conf_dir_contents ]]; then
 fi
 if [[ -z $graphite_webapp_dir_contents ]]; then
   cp $conf_dir/opt/graphite/webapp/graphite/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
+  cd $graphite_webapp_dir_contents
+  python manage.py syncdb --noinput
 fi
 
 # Start all deamon
