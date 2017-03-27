@@ -26,6 +26,11 @@ if [[ -z $graphite_webapp_dir_contents ]]; then
   cp $conf_dir/opt/graphite/webapp/graphite/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
 fi
 
+# init graphitedb if empty.
+graphitedb_size=$(ls -s /opt/graphite/storage/graphite.db | awk '{ print $1 }')
+echo $graphitedb_size
+[[ $graphitedb_size -eq 0 ]] && python /opt/graphite/webapp/graphite/manage.py syncdb --noinput
+
 # Start all deamon
 /etc/service/carbon/run &
 /etc/service/carbon-aggregator/run &
